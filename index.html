@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Texto com Múltiplas Cores</title>
+    <title data-key="title">Gerador de Texto com Múltiplas Cores</title>
+    
+    <meta name="description" content="Crie e personalize textos com cores usando este gerador online gratuito. Ideal para mensagens, status e postagens em redes sociais.">
+    <meta name="keywords" content="gerador de texto colorido, texto com cores, gerador de texto, personalizar texto, texto para redes sociais, gratuito">
+    <meta name="author" content="Moroti">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="URL_DO_SEU_SITE_AQUI">
     <style>
         :root {
             --bg-color: #f4f4f4;
             --text-color: #333;
             --container-bg: #fff;
             --border-color: #ccc;
-            --preview-bg: #f9f9f9;
+            --button-bg: #007bff;
+            --button-text-color: #fff;
         }
 
         body.dark-theme {
@@ -18,7 +25,8 @@
             --text-color: #e0e0e0;
             --container-bg: #1e1e1e;
             --border-color: #444;
-            --preview-bg: #2c2c2c;
+            --button-bg: #007bff;
+            --button-text-color: #fff;
         }
 
         body.gray-theme {
@@ -26,7 +34,8 @@
             --text-color: #e0e0e0;
             --container-bg: #555;
             --border-color: #888;
-            --preview-bg: #777;
+            --button-bg: #007bff;
+            --button-text-color: #fff;
         }
 
         body.ocean-theme {
@@ -34,7 +43,8 @@
             --text-color: #004d40;
             --container-bg: #b2ebf2;
             --border-color: #00796b;
-            --preview-bg: #e0f2f1;
+            --button-bg: #00796b;
+            --button-text-color: #fff;
         }
 
         body.forest-theme {
@@ -42,7 +52,8 @@
             --text-color: #3e2723;
             --container-bg: #dcedc8;
             --border-color: #689f38;
-            --preview-bg: #c5e1a5;
+            --button-bg: #689f38;
+            --button-text-color: #fff;
         }
 
         body.solaris-theme {
@@ -50,7 +61,8 @@
             --text-color: #bf360c;
             --container-bg: #fff9c4;
             --border-color: #ffb300;
-            --preview-bg: #fff59d;
+            --button-bg: #ffb300;
+            --button-text-color: #333;
         }
 
         body {
@@ -66,6 +78,56 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+        }
+        
+        .language-selector-container, .main-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .language-selector-container.active, .main-content.active {
+            display: flex;
+        }
+
+        .language-selector-container {
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .language-selector-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .language-selector-container select {
+            width: 200px;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            font-size: 16px;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+        
+        .language-selector-container button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: var(--button-bg);
+            color: var(--button-text-color);
+            transition: background-color 0.2s;
+        }
+
+        .language-selector-container button:hover {
+            opacity: 0.9;
         }
 
         .container {
@@ -136,44 +198,36 @@
             margin-top: 10px;
         }
 
-        .color-button, .copy-button {
+        .color-button {
             padding: 8px 12px;
             border: none;
-            border-radius: 4-px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
-            color: #fff;
+            color: var(--button-text-color);
+            background-color: var(--button-bg);
             transition: background-color 0.2s;
         }
 
-        .color-button {
-            background-color: #007bff;
-        }
-
         .color-button:hover {
-            background-color: #0056b3;
+            opacity: 0.9;
         }
         
         .copy-button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
             background-color: #28a745;
+            transition: background-color 0.2s;
         }
 
         .copy-button:hover {
             background-color: #218838;
         }
         
-        .preview-box {
-            border: 2px dashed var(--border-color);
-            padding: 10px;
-            min-height: 50px;
-            font-size: 18px;
-            color: var(--text-color);
-            background-color: var(--preview-bg);
-            border-radius: 4px;
-            white-space: pre-wrap;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
         .flex-row {
             display: flex;
             justify-content: space-between;
@@ -185,7 +239,7 @@
             padding: 15px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            background-color: var(--preview-bg);
+            background-color: var(--container-bg);
         }
         .tutorial h2 {
             margin-top: 0;
@@ -221,73 +275,81 @@
 </head>
 <body class="light-theme">
 
-    <div class="container">
-        <h1 data-key="title">Gerador de Texto com Cores</h1>
+    <div class="language-selector-container">
+        <h1 data-key="selectLangPrompt">Selecione seu idioma</h1>
+        <select id="initialLangSelector">
+            <option value="pt">Português</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="ru">Русский</option>
+        </select>
+        <button onclick="setInitialLanguage()">Continuar</button>
+    </div>
 
-        <div class="flex-row">
-            <div class="input-group">
-                <label data-key="themeLabel" for="themeSelector">Selecione o tema:</label>
-                <select id="themeSelector">
-                    <option data-key="light" value="light">Claro</option>
-                    <option data-key="dark" value="dark">Escuro</option>
-                    <option data-key="gray" value="gray">Cinza</option>
-                    <option data-key="ocean" value="ocean">Oceano</option>
-                    <option data-key="forest" value="forest">Floresta</option>
-                    <option data-key="solaris" value="solaris">Solaris</option>
-                </select>
+    <div class="main-content">
+        <div class="container">
+            <h1 data-key="title">Gerador de Texto com Cores</h1>
+    
+            <div class="flex-row">
+                <div class="input-group">
+                    <label data-key="themeLabel" for="themeSelector">Selecione o tema:</label>
+                    <select id="themeSelector">
+                        <option data-key="light" value="light">Claro</option>
+                        <option data-key="dark" value="dark">Escuro</option>
+                        <option data-key="gray" value="gray">Cinza</option>
+                        <option data-key="ocean" value="ocean">Oceano</option>
+                        <option data-key="forest" value="forest">Floresta</option>
+                        <option data-key="solaris" value="solaris">Solaris</option>
+                    </select>
+                </div>
+    
+                <div class="input-group">
+                    <label data-key="langLabel" for="langSelector">Idioma:</label>
+                    <select id="langSelector">
+                        <option value="pt">Português</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                </div>
             </div>
-
-            <div class="input-group">
-                <label data-key="langLabel" for="langSelector">Idioma:</label>
-                <select id="langSelector">
-                    <option value="pt">Português</option>
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                    <option value="ru">Русский</option>
-                </select>
+    
+            <div class="tutorial">
+                <h2 data-key="tutorialTitle">Como usar:</h2>
+                <p data-key="tutorialStep1">1. Digite a sua mensagem na caixa de texto abaixo.</p>
+                <p data-key="tutorialStep2">2. Para mudar a cor de uma palavra, <strong>selecione</strong> a palavra com o mouse.</p>
+                <p data-key="tutorialStep3">3. Escolha a cor que desejar na paleta.</p>
+                <p data-key="tutorialStep4">4. Clique no botão <strong>"Aplicar Cor"</strong>.</p>
+                <p data-key="tutorialStep5">5. Repita o processo para outras partes da mensagem, se quiser.</p>
+                <p data-key="tutorialStep6">6. A mensagem pronta estará na caixa <strong>"Resultado para copiar"</strong>.</p>
             </div>
-        </div>
-
-        <div class="tutorial">
-            <h2 data-key="tutorialTitle">Como usar:</h2>
-            <p data-key="tutorialStep1">1. Digite a sua mensagem na caixa de texto abaixo.</p>
-            <p data-key="tutorialStep2">2. Para mudar a cor de uma palavra, <strong>selecione</strong> a palavra com o mouse.</p>
-            <p data-key="tutorialStep3">3. Escolha a cor que desejar na paleta.</p>
-            <p data-key="tutorialStep4">4. Clique no botão <strong>"Aplicar Cor"</strong>.</p>
-            <p data-key="tutorialStep5">5. Repita o processo para outras partes da mensagem, se quiser.</p>
-            <p data-key="tutorialStep6">6. A mensagem pronta estará na caixa <strong>"Resultado para copiar"</strong>.</p>
-        </div>
-
-        <div class="input-group">
-            <label data-key="editorLabel" for="editor">Digite e edite seu texto:</label>
-            <div id="editor" contenteditable="true" spellcheck="false"></div>
-        </div>
-
-        <div class="input-group">
-            <label data-key="colorLabel" for="colorPicker">Escolha uma cor para aplicar:</label>
-            <input type="color" id="colorPicker" value="#000000">
-            <div class="button-group">
-                <button class="color-button" onclick="applyColor()" data-key="applyColorBtn">Aplicar Cor</button>
+    
+            <div class="input-group">
+                <label data-key="editorLabel" for="editor">Digite e edite seu texto:</label>
+                <div id="editor" contenteditable="true" spellcheck="false"></div>
+            </div>
+    
+            <div class="input-group">
+                <label data-key="colorLabel" for="colorPicker">Escolha uma cor para aplicar:</label>
+                <input type="color" id="colorPicker" value="#000000">
+                <div class="button-group">
+                    <button class="color-button" onclick="applyColor()" data-key="applyColorBtn">Aplicar Cor</button>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label data-key="resultLabel">Resultado para copiar:</label>
+                <textarea id="resultOutput" rows="4" readonly></textarea>
+                <div class="button-group">
+                    <button class="copy-button" onclick="copyToClipboard()" data-key="copyBtn">Copiar</button>
+                </div>
             </div>
         </div>
         
-        <div class="input-group">
-            <label data-key="resultLabel">Resultado para copiar:</label>
-            <textarea id="resultOutput" rows="4" readonly></textarea>
-            <div class="button-group">
-                <button class="copy-button" onclick="copyToClipboard()" data-key="copyBtn">Copiar</button>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label data-key="previewLabel">Pré-visualização:</label>
-            <div id="previewBox" class="preview-box"></div>
-        </div>
+        <footer class="footer-credits">
+            <p data-key="credits"></p>
+        </footer>
     </div>
-    
-    <footer class="footer-credits">
-        <p data-key="credits"></p>
-    </footer>
 
     <script>
         const themeSelector = document.getElementById('themeSelector');
@@ -295,10 +357,14 @@
         const colorPicker = document.getElementById('colorPicker');
         const editor = document.getElementById('editor');
         const resultOutput = document.getElementById('resultOutput');
-        const previewBox = document.getElementById('previewBox');
+        const initialLangSelector = document.getElementById('initialLangSelector');
+        const languageSelectorContainer = document.querySelector('.language-selector-container');
+        const mainContent = document.querySelector('.main-content');
 
         const translations = {
             pt: {
+                selectLangPrompt: 'Selecione seu idioma',
+                continueButton: 'Continuar',
                 title: 'Gerador de Texto com Cores',
                 themeLabel: 'Selecione o tema:',
                 light: 'Claro',
@@ -320,12 +386,14 @@
                 applyColorBtn: 'Aplicar Cor',
                 resultLabel: 'Resultado para copiar:',
                 copyBtn: 'Copiar',
-                previewLabel: 'Pré-visualização:',
                 copyAlert: 'Texto copiado para a área de transferência!',
                 copyError: 'Erro ao copiar o texto:',
-                credits: 'Criado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> e aprimorado com a ajuda do Gemini.'
+                credits: 'Criado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> e aprimorado com a ajuda do Gemini.',
+                initialText: 'Essa é uma <span style="color: #ff0000;">mensagem</span> de exemplo. Para começar, selecione e <span style="color: #0000ff;">pinte</span> as palavras que você quiser!'
             },
             en: {
+                selectLangPrompt: 'Select your language',
+                continueButton: 'Continue',
                 title: 'Text Color Generator',
                 themeLabel: 'Select theme:',
                 light: 'Light',
@@ -347,12 +415,14 @@
                 applyColorBtn: 'Apply Color',
                 resultLabel: 'Result to copy:',
                 copyBtn: 'Copy',
-                previewLabel: 'Preview:',
                 copyAlert: 'Text copied to clipboard!',
                 copyError: 'Error copying text:',
-                credits: 'Created by <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> and enhanced with the help of Gemini.'
+                credits: 'Created by <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> and enhanced with the help of Gemini.',
+                initialText: 'This is an <span style="color: #ff0000;">example</span> message. To get started, select and <span style="color: #0000ff;">color</span> the words you want!'
             },
             es: {
+                selectLangPrompt: 'Seleccione su idioma',
+                continueButton: 'Continuar',
                 title: 'Generador de Texto con Colores',
                 themeLabel: 'Seleccione el tema:',
                 light: 'Claro',
@@ -374,12 +444,14 @@
                 applyColorBtn: 'Aplicar Color',
                 resultLabel: 'Resultado para copiar:',
                 copyBtn: 'Copiar',
-                previewLabel: 'Vista previa:',
                 copyAlert: '¡Texto copiado al portapapeles!',
                 copyError: 'Error al copiar el texto:',
-                credits: 'Creado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> y mejorado con la ayuda de Gemini.'
+                credits: 'Creado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> y mejorado con la ayuda de Gemini.',
+                initialText: 'Este es un <span style="color: #ff0000;">mensaje</span> de ejemplo. Para empezar, selecciona y <span style="color: #0000ff;">colorea</span> las palabras que quieras!'
             },
             ru: {
+                selectLangPrompt: 'Выберите язык',
+                continueButton: 'Продолжить',
                 title: 'Генератор Цветного Текста',
                 themeLabel: 'Выберите тему:',
                 light: 'Светлая',
@@ -401,13 +473,13 @@
                 applyColorBtn: 'Применить Цвет',
                 resultLabel: 'Результат для копирования:',
                 copyBtn: 'Копировать',
-                previewLabel: 'Предварительный просмотр:',
                 copyAlert: 'Текст скопирован в буфер обмена!',
                 copyError: 'Ошибка при копировании текста:',
-                credits: 'Создано <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> и дополнено с помощью Gemini.'
+                credits: 'Создано <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> и дополнено с помощью Gemini.',
+                initialText: 'Это <span style="color: #ff0000;">пример</span> сообщения. Чтобы начать, выделите и <span style="color: #0000ff;">раскрасьте</span> нужные слова!'
             }
         };
-        
+
         function translatePage(lang) {
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
@@ -415,15 +487,15 @@
                     element.innerHTML = translations[lang][key];
                 }
             });
-            const editorPlaceholder = {
-                pt: 'Digite seu texto aqui...',
-                en: 'Type your text here...',
-                es: 'Escribe tu texto aquí...',
-                ru: 'Введите свой текст здесь...'
-            };
-            editor.setAttribute('placeholder', editorPlaceholder[lang] || '');
+        }
+        
+        // Função para mostrar a tela principal
+        function showMainContent() {
+            languageSelectorContainer.classList.remove('active');
+            mainContent.classList.add('active');
         }
 
+        // Função para aplicar as cores e salvar
         function applyColor() {
             const hexColor = colorPicker.value.substring(1);
             const selection = window.getSelection();
@@ -438,6 +510,7 @@
             updateResult();
         }
 
+        // Função para atualizar o resultado do texto
         function updateResult() {
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = editor.innerHTML;
@@ -459,7 +532,6 @@
             });
             
             resultOutput.value = formattedText;
-            previewBox.innerHTML = editor.innerHTML;
         }
 
         function rgbToHex(rgb) {
@@ -486,20 +558,23 @@
             localStorage.setItem('userTheme', selectedTheme);
         }
         
-        editor.addEventListener('input', updateResult);
-        themeSelector.addEventListener('change', changeTheme);
-        
-        langSelector.addEventListener('change', (e) => {
-            const selectedLang = e.target.value;
+        function changeLanguage() {
+            const selectedLang = langSelector.value;
             localStorage.setItem('userLang', selectedLang);
             translatePage(selectedLang);
-        });
+            updateResult();
+        }
+        
+        function setInitialLanguage() {
+            const selectedLang = initialLangSelector.value;
+            localStorage.setItem('userLang', selectedLang);
+            localStorage.setItem('visited', 'true');
+            
+            // Carrega o resto do site com o idioma selecionado
+            loadSite(selectedLang);
+        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('userLang');
-            if (savedLang) {
-                langSelector.value = savedLang;
-            }
+        function loadSite(lang) {
             const savedTheme = localStorage.getItem('userTheme');
             if (savedTheme) {
                 themeSelector.value = savedTheme;
@@ -507,8 +582,25 @@
             } else {
                 document.body.className = 'light-theme';
             }
-            translatePage(langSelector.value);
+            
+            langSelector.value = lang;
+            translatePage(lang);
+            editor.innerHTML = translations[lang].initialText;
             updateResult();
+            showMainContent();
+        }
+
+        editor.addEventListener('input', updateResult);
+        themeSelector.addEventListener('change', changeTheme);
+        langSelector.addEventListener('change', changeLanguage);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('visited')) {
+                languageSelectorContainer.classList.add('active');
+            } else {
+                const savedLang = localStorage.getItem('userLang');
+                loadSite(savedLang);
+            }
         });
     </script>
 
