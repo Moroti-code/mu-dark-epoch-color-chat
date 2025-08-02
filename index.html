@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Texto com Múltiplas Cores</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --container-bg: #fff;
+            --border-color: #ccc;
+            --preview-bg: #f9f9f9;
+        }
+
+        body.dark-theme {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --container-bg: #1e1e1e;
+            --border-color: #444;
+            --preview-bg: #2c2c2c;
+        }
+
+        body.gray-theme {
+            --bg-color: #666;
+            --text-color: #e0e0e0;
+            --container-bg: #555;
+            --border-color: #888;
+            --preview-bg: #777;
+        }
+
+        body.ocean-theme {
+            --bg-color: #e0f7fa;
+            --text-color: #004d40;
+            --container-bg: #b2ebf2;
+            --border-color: #00796b;
+            --preview-bg: #e0f2f1;
+        }
+
+        body.forest-theme {
+            --bg-color: #f1f8e9;
+            --text-color: #3e2723;
+            --container-bg: #dcedc8;
+            --border-color: #689f38;
+            --preview-bg: #c5e1a5;
+        }
+
+        body.solaris-theme {
+            --bg-color: #fffde7;
+            --text-color: #bf360c;
+            --container-bg: #fff9c4;
+            --border-color: #ffb300;
+            --preview-bg: #fff59d;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="color"], input[type="text"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        input[type="color"] {
+            height: 40px;
+            cursor: pointer;
+        }
+
+        #editor {
+            width: 100%;
+            min-height: 150px;
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            box-sizing: border-box;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        #editor:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .color-button, .copy-button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4-px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+            transition: background-color 0.2s;
+        }
+
+        .color-button {
+            background-color: #007bff;
+        }
+
+        .color-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .copy-button {
+            background-color: #28a745;
+        }
+
+        .copy-button:hover {
+            background-color: #218838;
+        }
+        
+        .preview-box {
+            border: 2px dashed var(--border-color);
+            padding: 10px;
+            min-height: 50px;
+            font-size: 18px;
+            color: var(--text-color);
+            background-color: var(--preview-bg);
+            border-radius: 4px;
+            white-space: pre-wrap;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .tutorial {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--preview-bg);
+        }
+        .tutorial h2 {
+            margin-top: 0;
+            color: var(--text-color);
+        }
+        .tutorial p {
+            margin-bottom: 5px;
+        }
+
+        .footer-credits {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+        
+        .footer-credits a, .footer-credits span {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .footer-credits a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="light-theme">
+
+    <div class="container">
+        <h1 data-key="title">Gerador de Texto com Cores</h1>
+
+        <div class="flex-row">
+            <div class="input-group">
+                <label data-key="themeLabel" for="themeSelector">Selecione o tema:</label>
+                <select id="themeSelector">
+                    <option data-key="light" value="light">Claro</option>
+                    <option data-key="dark" value="dark">Escuro</option>
+                    <option data-key="gray" value="gray">Cinza</option>
+                    <option data-key="ocean" value="ocean">Oceano</option>
+                    <option data-key="forest" value="forest">Floresta</option>
+                    <option data-key="solaris" value="solaris">Solaris</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label data-key="langLabel" for="langSelector">Idioma:</label>
+                <select id="langSelector">
+                    <option value="pt">Português</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="ru">Русский</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="tutorial">
+            <h2 data-key="tutorialTitle">Como usar:</h2>
+            <p data-key="tutorialStep1">1. Digite a sua mensagem na caixa de texto abaixo.</p>
+            <p data-key="tutorialStep2">2. Para mudar a cor de uma palavra, <strong>selecione</strong> a palavra com o mouse.</p>
+            <p data-key="tutorialStep3">3. Escolha a cor que desejar na paleta.</p>
+            <p data-key="tutorialStep4">4. Clique no botão <strong>"Aplicar Cor"</strong>.</p>
+            <p data-key="tutorialStep5">5. Repita o processo para outras partes da mensagem, se quiser.</p>
+            <p data-key="tutorialStep6">6. A mensagem pronta estará na caixa <strong>"Resultado para copiar"</strong>.</p>
+        </div>
+
+        <div class="input-group">
+            <label data-key="editorLabel" for="editor">Digite e edite seu texto:</label>
+            <div id="editor" contenteditable="true" spellcheck="false"></div>
+        </div>
+
+        <div class="input-group">
+            <label data-key="colorLabel" for="colorPicker">Escolha uma cor para aplicar:</label>
+            <input type="color" id="colorPicker" value="#000000">
+            <div class="button-group">
+                <button class="color-button" onclick="applyColor()" data-key="applyColorBtn">Aplicar Cor</button>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label data-key="resultLabel">Resultado para copiar:</label>
+            <textarea id="resultOutput" rows="4" readonly></textarea>
+            <div class="button-group">
+                <button class="copy-button" onclick="copyToClipboard()" data-key="copyBtn">Copiar</button>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label data-key="previewLabel">Pré-visualização:</label>
+            <div id="previewBox" class="preview-box"></div>
+        </div>
+    </div>
+    
+    <footer class="footer-credits">
+        <p data-key="credits"></p>
+    </footer>
+
+    <script>
+        const themeSelector = document.getElementById('themeSelector');
+        const langSelector = document.getElementById('langSelector');
+        const colorPicker = document.getElementById('colorPicker');
+        const editor = document.getElementById('editor');
+        const resultOutput = document.getElementById('resultOutput');
+        const previewBox = document.getElementById('previewBox');
+
+        const translations = {
+            pt: {
+                title: 'Gerador de Texto com Cores',
+                themeLabel: 'Selecione o tema:',
+                light: 'Claro',
+                dark: 'Escuro',
+                gray: 'Cinza',
+                ocean: 'Oceano',
+                forest: 'Floresta',
+                solaris: 'Solaris',
+                langLabel: 'Idioma:',
+                tutorialTitle: 'Como usar:',
+                tutorialStep1: '1. Digite a sua mensagem na caixa de texto abaixo.',
+                tutorialStep2: '2. Para mudar a cor de uma palavra, <strong>selecione</strong> a palavra com o mouse.',
+                tutorialStep3: '3. Escolha a cor que desejar na paleta.',
+                tutorialStep4: '4. Clique no botão <strong>"Aplicar Cor"</strong>.',
+                tutorialStep5: '5. Repita o processo para outras partes da mensagem, se quiser.',
+                tutorialStep6: '6. A mensagem pronta estará na caixa <strong>"Resultado para copiar"</strong>.',
+                editorLabel: 'Digite e edite seu texto:',
+                colorLabel: 'Escolha uma cor para aplicar:',
+                applyColorBtn: 'Aplicar Cor',
+                resultLabel: 'Resultado para copiar:',
+                copyBtn: 'Copiar',
+                previewLabel: 'Pré-visualização:',
+                copyAlert: 'Texto copiado para a área de transferência!',
+                copyError: 'Erro ao copiar o texto:',
+                credits: 'Criado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> e aprimorado com a ajuda do Gemini.'
+            },
+            en: {
+                title: 'Text Color Generator',
+                themeLabel: 'Select theme:',
+                light: 'Light',
+                dark: 'Dark',
+                gray: 'Gray',
+                ocean: 'Ocean',
+                forest: 'Forest',
+                solaris: 'Solaris',
+                langLabel: 'Language:',
+                tutorialTitle: 'How to use:',
+                tutorialStep1: '1. Type your message in the text box below.',
+                tutorialStep2: '2. To change a word\'s color, <strong>select</strong> the word with your mouse.',
+                tutorialStep3: '3. Choose the desired color from the palette.',
+                tutorialStep4: '4. Click the <strong>"Apply Color"</strong> button.',
+                tutorialStep5: '5. Repeat the process for other parts of the message, if you wish.',
+                tutorialStep6: '6. The ready message will be in the <strong>"Result to copy"</strong> box.',
+                editorLabel: 'Type and edit your text:',
+                colorLabel: 'Choose a color to apply:',
+                applyColorBtn: 'Apply Color',
+                resultLabel: 'Result to copy:',
+                copyBtn: 'Copy',
+                previewLabel: 'Preview:',
+                copyAlert: 'Text copied to clipboard!',
+                copyError: 'Error copying text:',
+                credits: 'Created by <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> and enhanced with the help of Gemini.'
+            },
+            es: {
+                title: 'Generador de Texto con Colores',
+                themeLabel: 'Seleccione el tema:',
+                light: 'Claro',
+                dark: 'Oscuro',
+                gray: 'Gris',
+                ocean: 'Océano',
+                forest: 'Bosque',
+                solaris: 'Solaris',
+                langLabel: 'Idioma:',
+                tutorialTitle: 'Cómo usar:',
+                tutorialStep1: '1. Escribe tu mensaje en el cuadro de texto a continuación.',
+                tutorialStep2: '2. Para cambiar el color de una palabra, <strong>selecciona</strong> la palabra con el ratón.',
+                tutorialStep3: '3. Elige el color deseado de la paleta.',
+                tutorialStep4: '4. Haz clic en el botón <strong>"Aplicar Color"</strong>.',
+                tutorialStep5: '5. Repite el proceso para otras partes del mensaje, si lo deseas.',
+                tutorialStep6: '6. El mensaje listo estará en el cuadro <strong>"Resultado para copiar"</strong>.',
+                editorLabel: 'Escribe y edita tu texto:',
+                colorLabel: 'Elige un color para aplicar:',
+                applyColorBtn: 'Aplicar Color',
+                resultLabel: 'Resultado para copiar:',
+                copyBtn: 'Copiar',
+                previewLabel: 'Vista previa:',
+                copyAlert: '¡Texto copiado al portapapeles!',
+                copyError: 'Error al copiar el texto:',
+                credits: 'Creado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> y mejorado con la ayuda de Gemini.'
+            },
+            ru: {
+                title: 'Генератор Цветного Текста',
+                themeLabel: 'Выберите тему:',
+                light: 'Светлая',
+                dark: 'Тёмная',
+                gray: 'Серая',
+                ocean: 'Океан',
+                forest: 'Лес',
+                solaris: 'Солярис',
+                langLabel: 'Язык:',
+                tutorialTitle: 'Как использовать:',
+                tutorialStep1: '1. Введите ваше сообщение в поле ниже.',
+                tutorialStep2: '2. Чтобы изменить цвет слова, <strong>выделите</strong> его мышью.',
+                tutorialStep3: '3. Выберите нужный цвет из палитры.',
+                tutorialStep4: '4. Нажмите кнопку <strong>"Применить Цвет"</strong>.',
+                tutorialStep5: '5. Повторите процесс для других частей сообщения, если хотите.',
+                tutorialStep6: '6. Готовое сообщение будет в поле <strong>"Результат для копирования"</strong>.',
+                editorLabel: 'Введите и отредактируйте текст:',
+                colorLabel: 'Выберите цвет для применения:',
+                applyColorBtn: 'Применить Цвет',
+                resultLabel: 'Результат для копирования:',
+                copyBtn: 'Копировать',
+                previewLabel: 'Предварительный просмотр:',
+                copyAlert: 'Текст скопирован в буфер обмена!',
+                copyError: 'Ошибка при копировании текста:',
+                credits: 'Создано <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> и дополнено с помощью Gemini.'
+            }
+        };
+        
+        function translatePage(lang) {
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            const editorPlaceholder = {
+                pt: 'Digite seu texto aqui...',
+                en: 'Type your text here...',
+                es: 'Escribe tu texto aquí...',
+                ru: 'Введите свой текст здесь...'
+            };
+            editor.setAttribute('placeholder', editorPlaceholder[lang] || '');
+        }
+
+        function applyColor() {
+            const hexColor = colorPicker.value.substring(1);
+            const selection = window.getSelection();
+
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const span = document.createElement('span');
+                span.style.color = `#${hexColor}`;
+                span.appendChild(range.extractContents());
+                range.insertNode(span);
+            }
+            updateResult();
+        }
+
+        function updateResult() {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = editor.innerHTML;
+            let formattedText = '';
+            
+            tempDiv.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    formattedText += node.textContent;
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.tagName === 'SPAN' && node.style.color) {
+                        const hexColor = rgbToHex(node.style.color).substring(1);
+                        formattedText += `[${hexColor}]${node.textContent}[-]`;
+                    } else if (node.tagName === 'BR') {
+                        formattedText += '\n';
+                    } else {
+                        formattedText += node.textContent;
+                    }
+                }
+            });
+            
+            resultOutput.value = formattedText;
+            previewBox.innerHTML = editor.innerHTML;
+        }
+
+        function rgbToHex(rgb) {
+            const rgbMatch = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            if (!rgbMatch) return rgb;
+
+            const hex = (x) => ("0" + parseInt(x).toString(16)).slice(-2);
+            return "#" + hex(rgbMatch[1]) + hex(rgbMatch[2]) + hex(rgbMatch[3]);
+        }
+
+        function copyToClipboard() {
+            resultOutput.select();
+            const currentLang = langSelector.value;
+            navigator.clipboard.writeText(resultOutput.value).then(() => {
+                alert(translations[currentLang].copyAlert);
+            }).catch(err => {
+                alert(translations[currentLang].copyError + ' ' + err);
+            });
+        }
+        
+        function changeTheme() {
+            const selectedTheme = themeSelector.value;
+            document.body.className = `${selectedTheme}-theme`;
+            localStorage.setItem('userTheme', selectedTheme);
+        }
+        
+        editor.addEventListener('input', updateResult);
+        themeSelector.addEventListener('change', changeTheme);
+        
+        langSelector.addEventListener('change', (e) => {
+            const selectedLang = e.target.value;
+            localStorage.setItem('userLang', selectedLang);
+            translatePage(selectedLang);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('userLang');
+            if (savedLang) {
+                langSelector.value = savedLang;
+            }
+            const savedTheme = localStorage.getItem('userTheme');
+            if (savedTheme) {
+                themeSelector.value = savedTheme;
+                document.body.className = `${savedTheme}-theme`;
+            } else {
+                document.body.className = 'light-theme';
+            }
+            translatePage(langSelector.value);
+            updateResult();
+        });
+    </script>
+
+</body>
+</html>
