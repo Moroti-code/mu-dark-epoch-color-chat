@@ -43,7 +43,7 @@ Para rodar este projeto em sua máquina local, siga estes passos:
 
 1.  Clone o repositório para o seu computador:
     ```bash
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
+    git clone [https://github.com/Moroti-code/mu-dark-epoch-color-chat.git](https://github.com/Moroti-code/mu-dark-epoch-color-chat.git)
     ```
 2.  Abra a pasta do projeto.
 3.  Abra o arquivo `index.html` em seu navegador web preferido.
@@ -58,5 +58,5 @@ Este projeto está licenciado sob a Licença MIT.
 
 ## 🙏 Créditos
 
--   **Autor:** [Moroti](https://github.com/Moroti)
+-   **Autor:** [Moroti](https://github.com/Moroti-code)
 -   **Assistência e aprimoramentos:** Este projeto foi aprimorado com a ajuda do **Gemini**, uma Inteligência Artificial do Google.
