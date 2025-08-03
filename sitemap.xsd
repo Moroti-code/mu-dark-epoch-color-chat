@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+           targetNamespace="http://www.sitemaps.org/schemas/sitemap/0.9"
+           elementFormDefault="qualified">
+
+  <xs:element name="urlset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="url" type="tns:url_type" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="url_type">
+    <xs:sequence>
+      <xs:element name="loc" type="tns:loc_type"/>
+      <xs:element name="lastmod" type="xs:date" minOccurs="0"/>
+      <xs:element name="changefreq" type="tns:changefreq_type" minOccurs="0"/>
+      <xs:element name="priority" type="tns:priority_type" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="loc_type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="2048"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="changefreq_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="always"/>
+      <xs:enumeration value="hourly"/>
+      <xs:enumeration value="daily"/>
+      <xs:enumeration value="weekly"/>
+      <xs:enumeration value="monthly"/>
+      <xs:enumeration value="yearly"/>
+      <xs:enumeration value="never"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="priority_type">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0.0"/>
+      <xs:maxInclusive value="1.0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
