@@ -1,6 +1,6 @@
-# 🌈 Gerador de Texto com Múltiplas Cores
+# 🌈 Gerador de Texto com Múltiplas Cores para MU: Dark Epoch
 
-Este é um gerador de texto online simples e intuitivo que permite criar mensagens com múltiplas cores. Ideal para personalizar status, postagens em redes sociais, descrições e muito mais!
+Este é um gerador de texto online, simples e intuitivo, feito para criar mensagens com múltiplas cores para o chat do jogo **MU: Dark Epoch**. Personalize suas mensagens para se destacar e se comunicar de forma única com outros jogadores!
 
 ![Captura de tela do projeto](https://raw.githubusercontent.com/Moroti-code/mu-dark-epoch-color-chat/refs/heads/main/Captura%20de%20tela%202025-08-03%20143521.png)
 
