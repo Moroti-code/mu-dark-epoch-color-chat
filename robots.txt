@@ -1,0 +1,8 @@
+# Bloqueia todos os robôs de acessar a pasta de administração.
+# A menos que você tenha uma, não é necessário.
+User-agent: *
+Allow: /
+
+# Aponta para o seu sitemap.xml, ajudando os motores de busca
+# a encontrar e indexar suas URLs.
+Sitemap: https://mu-dark-epoch-color-chat.vercel.app/sitemap.xml
