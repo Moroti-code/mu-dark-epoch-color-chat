@@ -3,73 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-key="title">Gerador de Texto com Múltiplas Cores</title>
+    <title data-key="title">Gerador de Texto com Múltiplas Cores para MU: Dark Epoch</title>
     
-    <meta name="description" content="Crie e personalize textos com cores usando este gerador online gratuito. Ideal para mensagens, status e postagens em redes sociais.">
-    <meta name="keywords" content="gerador de texto colorido, texto com cores, gerador de texto, personalizar texto, texto para redes sociais, gratuito">
-    <meta name="author" content="Moroti">
+    <meta name="description" content="Crie mensagens coloridas para o chat do jogo MU: Dark Epoch com este gerador online gratuito. Destaque-se com textos personalizados!">
+    <meta name="keywords" content="gerador texto colorido mu dark epoch, texto cores mu online, chat mu dark epoch, personalizador texto, mu dark epoch, Moroti-code">
+    <meta name="author" content="Moroti-code">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="URL_DO_SEU_SITE_AQUI">
+    <link rel="canonical" href="https://mu-dark-epoch-color-chat.vercel.app/">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-color: #f4f4f4;
-            --text-color: #333;
-            --container-bg: #fff;
-            --border-color: #ccc;
+            --bg-color: #f0f2f5;
+            --text-color: #333333;
+            --container-bg: #ffffff;
+            --border-color: #e0e0e0;
             --button-bg: #007bff;
-            --button-text-color: #fff;
+            --button-text-color: #ffffff;
+            --secondary-button-bg: #28a745;
         }
 
         body.dark-theme {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --container-bg: #1e1e1e;
-            --border-color: #444;
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --container-bg: #2c2c2c;
+            --border-color: #444444;
             --button-bg: #007bff;
-            --button-text-color: #fff;
+            --button-text-color: #ffffff;
+            --secondary-button-bg: #28a745;
         }
 
         body.gray-theme {
-            --bg-color: #666;
-            --text-color: #e0e0e0;
-            --container-bg: #555;
-            --border-color: #888;
+            --bg-color: #6c757d;
+            --text-color: #e9ecef;
+            --container-bg: #495057;
+            --border-color: #adb5bd;
             --button-bg: #007bff;
-            --button-text-color: #fff;
+            --button-text-color: #ffffff;
+            --secondary-button-bg: #28a745;
         }
 
         body.ocean-theme {
-            --bg-color: #e0f7fa;
-            --text-color: #004d40;
-            --container-bg: #b2ebf2;
-            --border-color: #00796b;
-            --button-bg: #00796b;
-            --button-text-color: #fff;
+            --bg-color: #e3f2fd;
+            --text-color: #0d47a1;
+            --container-bg: #bbdefb;
+            --border-color: #64b5f6;
+            --button-bg: #1976d2;
+            --button-text-color: #ffffff;
+            --secondary-button-bg: #388e3c;
         }
 
         body.forest-theme {
-            --bg-color: #f1f8e9;
-            --text-color: #3e2723;
-            --container-bg: #dcedc8;
-            --border-color: #689f38;
-            --button-bg: #689f38;
-            --button-text-color: #fff;
+            --bg-color: #e8f5e9;
+            --text-color: #2e7d32;
+            --container-bg: #c8e6c9;
+            --border-color: #81c784;
+            --button-bg: #43a047;
+            --button-text-color: #ffffff;
+            --secondary-button-bg: #66bb6a;
         }
 
         body.solaris-theme {
             --bg-color: #fffde7;
-            --text-color: #bf360c;
+            --text-color: #ff8f00;
             --container-bg: #fff9c4;
-            --border-color: #ffb300;
-            --button-bg: #ffb300;
-            --button-text-color: #333;
+            --border-color: #ffeb3b;
+            --button-bg: #ffc107;
+            --button-text-color: #333333;
+            --secondary-button-bg: #ffa000;
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.4s ease, color 0.4s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -95,55 +106,62 @@
         .language-selector-container {
             background-color: var(--container-bg);
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
         }
         
         .language-selector-container h1 {
             margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: 700;
         }
 
         .language-selector-container select {
-            width: 200px;
-            padding: 10px;
-            border-radius: 4px;
+            width: 250px;
+            padding: 12px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
-            font-size: 16px;
+            font-size: 1rem;
             background-color: var(--container-bg);
             color: var(--text-color);
             margin-bottom: 20px;
+            transition: all 0.4s ease;
         }
         
         .language-selector-container button {
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 700;
             background-color: var(--button-bg);
             color: var(--button-text-color);
-            transition: background-color 0.2s;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .language-selector-container button:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
         }
 
         .container {
             background-color: var(--container-bg);
-            padding: 20px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 600px;
-            transition: background-color 0.3s ease;
+            max-width: 650px;
+            transition: all 0.4s ease;
         }
 
         h1 {
             text-align: center;
             color: var(--text-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 2rem;
+            font-weight: 700;
         }
 
         .input-group {
@@ -153,79 +171,101 @@
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+            font-weight: 700;
+            color: var(--text-color);
         }
 
         input[type="color"], input[type="text"], textarea, select {
             width: 100%;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 12px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
             box-sizing: border-box;
-            font-size: 16px;
+            font-size: 1rem;
             background-color: var(--container-bg);
             color: var(--text-color);
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         input[type="color"] {
-            height: 40px;
+            height: 45px;
             cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            width: 100%;
+        }
+        input[type="color"]::-webkit-color-swatch {
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        input[type="color"]::-moz-color-swatch {
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
         #editor {
             width: 100%;
-            min-height: 150px;
+            min-height: 180px;
             border: 1px solid var(--border-color);
-            padding: 10px;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1rem;
             background-color: var(--container-bg);
             color: var(--text-color);
             box-sizing: border-box;
             overflow-y: auto;
             white-space: pre-wrap;
+            transition: all 0.4s ease;
         }
         
-        #editor:focus {
+        #editor:focus, input[type="color"]:focus, input[type="text"]:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: #007bff;
+            border-color: var(--button-bg);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
         }
 
         .button-group {
             display: flex;
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .color-button {
-            padding: 8px 12px;
+            padding: 10px 18px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 0.9rem;
+            font-weight: 700;
             color: var(--button-text-color);
             background-color: var(--button-bg);
-            transition: background-color 0.2s;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .color-button:hover {
             opacity: 0.9;
+            transform: translateY(-2px);
         }
         
         .copy-button {
-            padding: 8px 12px;
+            padding: 10px 18px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
-            color: #fff;
-            background-color: #28a745;
-            transition: background-color 0.2s;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ffffff;
+            background-color: var(--secondary-button-bg);
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .copy-button:hover {
             background-color: #218838;
+            transform: translateY(-2px);
         }
         
         .flex-row {
@@ -235,41 +275,85 @@
         }
         
         .tutorial {
-            margin-bottom: 20px;
-            padding: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 12px;
             background-color: var(--container-bg);
+            transition: all 0.4s ease;
         }
         .tutorial h2 {
             margin-top: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--text-color);
         }
         .tutorial p {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .footer-credits {
             margin-top: 40px;
             text-align: center;
-            font-size: 14px;
-            color: #777;
+            font-size: 0.8rem;
+            color: #888;
             padding: 10px;
             border-top: 1px solid var(--border-color);
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             box-sizing: border-box;
+            transition: all 0.4s ease;
         }
         
         .footer-credits a, .footer-credits span {
             color: var(--text-color);
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
+            font-weight: 700;
+            transition: color 0.3s ease;
         }
 
         .footer-credits a:hover {
             text-decoration: underline;
+        }
+
+        /* --- Media Queries para Responsividade --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+                max-width: 95%;
+            }
+
+            .flex-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .input-group label {
+                margin-bottom: 5px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .language-selector-container {
+                padding: 30px;
+                width: 90%;
+            }
+
+            .language-selector-container select, .language-selector-container button {
+                width: 100%;
+            }
+            
+            .footer-credits {
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
@@ -283,7 +367,7 @@
             <option value="es">Español</option>
             <option value="ru">Русский</option>
         </select>
-        <button onclick="setInitialLanguage()">Continuar</button>
+        <button onclick="setInitialLanguage()" data-key="continueButton">Continuar</button>
     </div>
 
     <div class="main-content">
@@ -331,7 +415,7 @@
     
             <div class="input-group">
                 <label data-key="colorLabel" for="colorPicker">Escolha uma cor para aplicar:</label>
-                <input type="color" id="colorPicker" value="#000000">
+                <input type="color" id="colorPicker" value="#007bff">
                 <div class="button-group">
                     <button class="color-button" onclick="applyColor()" data-key="applyColorBtn">Aplicar Cor</button>
                 </div>
@@ -339,9 +423,11 @@
             
             <div class="input-group">
                 <label data-key="resultLabel">Resultado para copiar:</label>
-                <textarea id="resultOutput" rows="4" readonly></textarea>
-                <div class="button-group">
-                    <button class="copy-button" onclick="copyToClipboard()" data-key="copyBtn">Copiar</button>
+                <div class="copy-container">
+                    <textarea id="resultOutput" rows="4" readonly></textarea>
+                    <div class="button-group">
+                        <button class="copy-button" onclick="copyToClipboard()" data-key="copyBtn">Copiar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -489,13 +575,11 @@
             });
         }
         
-        // Função para mostrar a tela principal
         function showMainContent() {
             languageSelectorContainer.classList.remove('active');
             mainContent.classList.add('active');
         }
 
-        // Função para aplicar as cores e salvar
         function applyColor() {
             const hexColor = colorPicker.value.substring(1);
             const selection = window.getSelection();
@@ -510,7 +594,6 @@
             updateResult();
         }
 
-        // Função para atualizar o resultado do texto
         function updateResult() {
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = editor.innerHTML;
@@ -570,7 +653,6 @@
             localStorage.setItem('userLang', selectedLang);
             localStorage.setItem('visited', 'true');
             
-            // Carrega o resto do site com o idioma selecionado
             loadSite(selectedLang);
         }
 
