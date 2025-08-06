@@ -14,6 +14,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
     <style>
         :root {
@@ -154,6 +156,7 @@
             width: 100%;
             max-width: 650px;
             transition: all 0.4s ease;
+            margin-bottom: 20px;
         }
 
         h1 {
@@ -294,6 +297,69 @@
             line-height: 1.6;
         }
 
+        /* Novo estilo para a seção de links úteis */
+        .links-uteis {
+            background-color: var(--container-bg);
+            padding: 30px 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 650px;
+            transition: all 0.4s ease;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .links-uteis h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .links-uteis ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .links-uteis li {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+        .links-uteis li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .links-uteis a {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: var(--button-bg);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        .links-uteis a:hover {
+            color: #0056b3;
+        }
+        .links-uteis a i {
+            margin-right: 12px;
+            font-size: 1.3rem;
+            color: var(--button-bg);
+        }
+        .links-uteis p {
+            margin: 8px 0 0 0;
+            padding-left: 32px; /* Alinha o texto com o título */
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
         .footer-credits {
             margin-top: 40px;
             text-align: center;
@@ -324,9 +390,17 @@
                 padding: 10px;
             }
 
-            .container {
+            .container, .links-uteis {
                 padding: 15px;
                 max-width: 95%;
+            }
+
+            .links-uteis a i {
+                font-size: 1.1rem;
+            }
+
+            .links-uteis p {
+                padding-left: 28px;
             }
 
             .flex-row {
@@ -432,6 +506,40 @@
             </div>
         </div>
         
+        <div class="links-uteis">
+            <h2 data-key="usefulLinksTitle">Links Úteis</h2>
+            <ul>
+                <li>
+                    <a href="https://sites.google.com/view/the-compendium/home" target="_blank" data-key="wikiLink">
+                        <i class="fas fa-book"></i>
+                        <span>Wiki do Jogo (The Compendium)</span>
+                    </a>
+                    <p data-key="wikiDescription">Guia completo sobre as mecânicas, estratégias de up e dicas essenciais para otimizar o poder do seu personagem.</p>
+                </li>
+                <li>
+                    <a href="https://pay.37games.com/platform/officialTopup.html?gameId=390" target="_blank" data-key="rechargeLink">
+                        <i class="fas fa-sack-dollar"></i>
+                        <span>Site Oficial de Recarga</span>
+                    </a>
+                    <p data-key="rechargeDescription">Página oficial de recarga. Resgate um presente semanal <strong>gratuito</strong> e outro bônus especial ao realizar qualquer recarga.</p>
+                </li>
+                <li>
+                    <a href="https://auto-page.37games.com/muvip01/?srtl=3285.0.990811.3314" target="_blank" data-key="vipLink">
+                        <i class="fas fa-gem"></i>
+                        <span>Resgate de Pontos VIP</span>
+                    </a>
+                    <p data-key="vipDescription">Faça o <strong>check-in diário</strong> para resgatar pontos VIP e troque-os por itens valiosos, com bônus extras em recargas.</p>
+                </li>
+                <li>
+                    <a href="https://auto-page.37games.com/mus_weeklygift/?srtl=3260.0.990972.2960" target="_blank" data-key="weeklyLink">
+                        <i class="fas fa-gift"></i>
+                        <span>Bônus Semanais de Vinculação</span>
+                    </a>
+                    <p data-key="weeklyDescription">Garanta bônus semanais exclusivos ao vincular sua conta do jogo a plataformas como WhatsApp, Facebook e Telegram.</p>
+                </li>
+            </ul>
+        </div>
+        
         <footer class="footer-credits">
             <p data-key="credits"></p>
         </footer>
@@ -474,6 +582,15 @@
                 copyBtn: 'Copiar',
                 copyAlert: 'Texto copiado para a área de transferência!',
                 copyError: 'Erro ao copiar o texto:',
+                usefulLinksTitle: 'Links Úteis',
+                wikiLink: 'Wiki do Jogo (The Compendium)',
+                wikiDescription: 'Guia completo sobre as mecânicas, estratégias de up e dicas essenciais para otimizar o poder do seu personagem.',
+                rechargeLink: 'Site Oficial de Recarga',
+                rechargeDescription: 'Página oficial de recarga. Resgate um presente semanal <strong>gratuito</strong> e outro bônus especial ao realizar qualquer recarga.',
+                vipLink: 'Resgate de Pontos VIP',
+                vipDescription: 'Faça o <strong>check-in diário</strong> para resgatar pontos VIP e troque-os por itens valiosos, com bônus extras em recargas.',
+                weeklyLink: 'Bônus Semanais de Vinculação',
+                weeklyDescription: 'Garanta bônus semanais exclusivos ao vincular sua conta do jogo a plataformas como WhatsApp, Facebook e Telegram.',
                 credits: 'Criado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> e aprimorado com a ajuda do Gemini.',
                 initialText: 'Essa é uma <span style="color: #ff0000;">mensagem</span> de exemplo. Para começar, selecione e <span style="color: #0000ff;">pinte</span> as palavras que você quiser!'
             },
@@ -503,6 +620,15 @@
                 copyBtn: 'Copy',
                 copyAlert: 'Text copied to clipboard!',
                 copyError: 'Error copying text:',
+                usefulLinksTitle: 'Useful Links',
+                wikiLink: 'Game Wiki (The Compendium)',
+                wikiDescription: 'A comprehensive guide on game mechanics, leveling strategies, and essential tips to optimize your character\'s power.',
+                rechargeLink: 'Official Recharge Site',
+                rechargeDescription: 'The official recharge page. Claim a <strong>free</strong> weekly gift and another special bonus when you make any recharge.',
+                vipLink: 'VIP Points Redemption',
+                vipDescription: 'Perform a <strong>daily check-in</strong> to redeem VIP points and exchange them for valuable items, with extra bonuses on recharges.',
+                weeklyLink: 'Weekly Binding Bonuses',
+                weeklyDescription: 'Secure exclusive weekly bonuses by binding your game account to platforms like WhatsApp, Facebook, and Telegram.',
                 credits: 'Created by <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> and enhanced with the help of Gemini.',
                 initialText: 'This is an <span style="color: #ff0000;">example</span> message. To get started, select and <span style="color: #0000ff;">color</span> the words you want!'
             },
@@ -532,6 +658,15 @@
                 copyBtn: 'Copiar',
                 copyAlert: '¡Texto copiado al portapapeles!',
                 copyError: 'Error al copiar el texto:',
+                usefulLinksTitle: 'Enlaces Útiles',
+                wikiLink: 'Wiki del Juego (The Compendium)',
+                wikiDescription: 'Una guía completa sobre las mecánicas del juego, estrategias de subida de nivel y consejos esenciales para optimizar el poder de tu personaje.',
+                rechargeLink: 'Sitio Oficial de Recarga',
+                rechargeDescription: 'La página oficial de recarga. Reclama un regalo semanal <strong>gratuito</strong> y otra bonificación especial al realizar cualquier recarga.',
+                vipLink: 'Canje de Puntos VIP',
+                vipDescription: 'Realiza un <strong>check-in diario</strong> para canjear puntos VIP y cámbialos por objetos valiosos, con bonificaciones extra en recargas.',
+                weeklyLink: 'Bonificaciones de Vinculación Semanales',
+                weeklyDescription: 'Asegura bonificaciones semanales exclusivas al vincular tu cuenta del juego a plataformas como WhatsApp, Facebook y Telegram.',
                 credits: 'Creado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> y mejorado con la ayuda de Gemini.',
                 initialText: 'Este es un <span style="color: #ff0000;">mensaje</span> de ejemplo. Para empezar, selecciona y <span style="color: #0000ff;">colorea</span> las palabras que quieras!'
             },
@@ -561,6 +696,15 @@
                 copyBtn: 'Копировать',
                 copyAlert: 'Текст скопирован в буфер обмена!',
                 copyError: 'Ошибка при копировании текста:',
+                usefulLinksTitle: 'Полезные ссылки',
+                wikiLink: 'Вики игры (The Compendium)',
+                wikiDescription: 'Комплексное руководство по игровой механике, стратегиям прокачки и основным советам по оптимизации силы вашего персонажа.',
+                rechargeLink: 'Официальный сайт пополнения',
+                rechargeDescription: 'Официальная страница пополнения. Получите <strong>бесплатный</strong> еженедельный подарок и еще один специальный бонус при любом пополнении.',
+                vipLink: 'Обмен VIP-очков',
+                vipDescription: 'Выполняйте <strong>ежедневный вход</strong> для обмена VIP-очков на ценные предметы, с дополнительными бонусами при пополнении.',
+                weeklyLink: 'Еженедельные бонусы за привязку',
+                weeklyDescription: 'Получайте эксклюзивные еженедельные бонусы, привязав свой игровой аккаунт к платформам, таким как WhatsApp, Facebook и Telegram.',
                 credits: 'Создано <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> и дополнено с помощью Gemini.',
                 initialText: 'Это <span style="color: #ff0000;">пример</span> сообщения. Чтобы начать, выделите и <span style="color: #0000ff;">раскрасьте</span> нужные слова!'
             }
@@ -594,32 +738,36 @@
             updateResult();
         }
 
-        function updateResult() {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = editor.innerHTML;
-            let formattedText = '';
-            
-            tempDiv.childNodes.forEach(node => {
+        function processNodes(nodes) {
+            let text = '';
+            nodes.forEach(node => {
                 if (node.nodeType === Node.TEXT_NODE) {
-                    formattedText += node.textContent;
+                    text += node.textContent;
                 } else if (node.nodeType === Node.ELEMENT_NODE) {
                     if (node.tagName === 'SPAN' && node.style.color) {
                         const hexColor = rgbToHex(node.style.color).substring(1);
-                        formattedText += `[${hexColor}]${node.textContent}[-]`;
+                        text += `[${hexColor}]${processNodes(node.childNodes)}[-]`;
                     } else if (node.tagName === 'BR') {
-                        formattedText += '\n';
+                        text += '\n';
                     } else {
-                        formattedText += node.textContent;
+                        text += processNodes(node.childNodes);
                     }
                 }
             });
-            
-            resultOutput.value = formattedText;
+            return text;
+        }
+
+        function updateResult() {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = editor.innerHTML;
+            resultOutput.value = processNodes(tempDiv.childNodes);
         }
 
         function rgbToHex(rgb) {
             const rgbMatch = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-            if (!rgbMatch) return rgb;
+            if (!rgbMatch) {
+                return rgb;
+            }
 
             const hex = (x) => ("0" + parseInt(x).toString(16)).slice(-2);
             return "#" + hex(rgbMatch[1]) + hex(rgbMatch[2]) + hex(rgbMatch[3]);
