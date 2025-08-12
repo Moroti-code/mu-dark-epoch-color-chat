@@ -24,8 +24,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-
     <style>
+        /* Variáveis de cor para os temas */
         :root {
             --bg-color: #f0f2f5;
             --text-color: #333333;
@@ -47,9 +47,9 @@
         }
 
         body.gray-theme {
-            --bg-color: #6c757d;
+            --bg-color: #495057;
             --text-color: #e9ecef;
-            --container-bg: #495057;
+            --container-bg: #6c757d;
             --border-color: #adb5bd;
             --button-bg: #007bff;
             --button-text-color: #ffffff;
@@ -86,6 +86,7 @@
             --secondary-button-bg: #ffa000;
         }
 
+        /* Estilos gerais */
         body {
             font-family: 'Roboto', sans-serif;
             background-color: var(--bg-color);
@@ -226,7 +227,7 @@
             border-radius: 8px;
             font-size: 1rem;
             background-color: var(--container-bg);
-            color: #4a4a4a; /* Alterado para uma cor fixa */
+            color: #4a4a4a;
             box-sizing: border-box;
             overflow-y: auto;
             white-space: pre-wrap;
@@ -305,7 +306,6 @@
             line-height: 1.6;
         }
 
-        /* Novo estilo para a seção de links úteis */
         .links-uteis {
             background-color: var(--container-bg);
             padding: 30px 50px;
@@ -362,7 +362,7 @@
         }
         .links-uteis p {
             margin: 8px 0 0 0;
-            padding-left: 32px; /* Alinha o texto com o título */
+            padding-left: 32px;
             font-size: 0.9rem;
             line-height: 1.6;
             color: var(--text-color);
@@ -392,47 +392,38 @@
             text-decoration: underline;
         }
 
-        /* --- Media Queries para Responsividade --- */
+        /* Media Queries para Responsividade */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
-
             .container, .links-uteis {
                 padding: 15px;
                 max-width: 95%;
             }
-
             .links-uteis a i {
                 font-size: 1.1rem;
             }
-
             .links-uteis p {
                 padding-left: 28px;
             }
-
             .flex-row {
                 flex-direction: column;
                 gap: 15px;
             }
-
             .input-group label {
                 margin-bottom: 5px;
             }
-
             h1 {
                 font-size: 24px;
             }
-
             .language-selector-container {
                 padding: 30px;
                 width: 90%;
             }
-
             .language-selector-container select, .language-selector-container button {
                 width: 100%;
             }
-            
             .footer-credits {
                 font-size: 0.7rem;
             }
@@ -561,6 +552,7 @@
     </div>
 
     <script>
+        // Mapeamento de elementos do DOM
         const themeSelector = document.getElementById('themeSelector');
         const langSelector = document.getElementById('langSelector');
         const colorPicker = document.getElementById('colorPicker');
@@ -570,6 +562,7 @@
         const languageSelectorContainer = document.querySelector('.language-selector-container');
         const mainContent = document.querySelector('.main-content');
 
+        // Objeto de traduções para suportar múltiplos idiomas
         const translations = {
             pt: {
                 selectLangPrompt: 'Selecione seu idioma',
@@ -688,7 +681,7 @@
                 weeklyDescription: 'Asegura bonificaciones semanales exclusivas al vincular tu cuenta del juego a plataformas como WhatsApp, Facebook y Telegram.',
                 discordLink: 'Campaña Discord',
                 discordDescription: 'Participa en un evento por tiempo limitado y gana recompensas en el juego ayudando a la comunidad a alcanzar metas de miembros en Discord.',
-                credits: 'Creado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> y mejorado con la ayuda de Gemini.',
+                credits: 'Creado por <a id="moroti-link" href="#" target="_blank" style="color: inherit; text-decoration: none;">Moroti</a> y mejorado con la ayuda do Gemini.',
                 initialText: 'Este es un <span style="color: #ff0000;">mensaje</span> de ejemplo. Para empezar, selecciona y <span style="color: #0000ff;">colorea</span> las palabras que quieras!'
             },
             ru: {
@@ -732,7 +725,11 @@
                 initialText: 'Это <span style="color: #ff0000;">пример</span> сообщения. Чтобы начать, выделите и <span style="color: #0000ff;">раскрасьте</span> нужные слова!'
             }
         };
-
+        
+        /**
+         * Traduz os elementos da página com base no idioma selecionado.
+         * @param {string} lang - O código do idioma (ex: 'pt', 'en').
+         */
         function translatePage(lang) {
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
@@ -742,17 +739,28 @@
             });
         }
         
+        /**
+         * Exibe o conteúdo principal da página e oculta o seletor de idioma.
+         */
         function showMainContent() {
             languageSelectorContainer.classList.remove('active');
             mainContent.classList.add('active');
         }
 
+        /**
+         * Aplica a cor selecionada ao texto selecionado no editor.
+         */
         function applyColor() {
             const hexColor = colorPicker.value;
             document.execCommand('foreColor', false, hexColor);
             updateResult();
         }
 
+        /**
+         * Processa os nós do DOM para gerar a string de cores compatível com o jogo.
+         * @param {NodeList} nodes - A lista de nós a ser processada.
+         * @returns {string} - A string de texto formatada com cores.
+         */
         function processNodes(nodes) {
             let text = '';
             nodes.forEach(node => {
@@ -772,6 +780,9 @@
             return text;
         }
         
+        /**
+         * Atualiza a caixa de texto de resultado com a formatação do jogo.
+         */
         function updateResult() {
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = editor.innerHTML.replace(/<span style="color:\s*([^"]+);">/g, (match, color) => {
@@ -780,16 +791,9 @@
             resultOutput.value = processNodes(tempDiv.childNodes);
         }
 
-        function rgbToHex(rgb) {
-            const rgbMatch = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-            if (!rgbMatch) {
-                return rgb;
-            }
-
-            const hex = (x) => ("0" + parseInt(x).toString(16)).slice(-2);
-            return "#" + hex(rgbMatch[1]) + hex(rgbMatch[2]) + hex(rgbMatch[3]);
-        }
-
+        /**
+         * Copia o texto da área de resultado para a área de transferência.
+         */
         function copyToClipboard() {
             resultOutput.select();
             const currentLang = langSelector.value;
@@ -800,12 +804,18 @@
             });
         }
         
+        /**
+         * Altera o tema visual da página.
+         */
         function changeTheme() {
             const selectedTheme = themeSelector.value;
             document.body.className = `${selectedTheme}-theme`;
             localStorage.setItem('userTheme', selectedTheme);
         }
         
+        /**
+         * Altera o idioma da página.
+         */
         function changeLanguage() {
             const selectedLang = langSelector.value;
             localStorage.setItem('userLang', selectedLang);
@@ -813,16 +823,23 @@
             updateResult();
         }
         
+        /**
+         * Define o idioma inicial após a primeira visita.
+         */
         function setInitialLanguage() {
             const selectedLang = initialLangSelector.value;
             localStorage.setItem('userLang', selectedLang);
-            // Salva o timestamp para a próxima verificação
             localStorage.setItem('lastVisitTimestamp', new Date().getTime());
             
             // Carrega o site com a mensagem inicial
             loadSite(selectedLang, true);
         }
 
+        /**
+         * Carrega o conteúdo principal da página com base nas preferências salvas.
+         * @param {string} lang - O idioma a ser carregado.
+         * @param {boolean} shouldLoadInitialText - Se deve carregar o texto de exemplo.
+         */
         function loadSite(lang, shouldLoadInitialText) {
             const savedTheme = localStorage.getItem('userTheme');
             if (savedTheme) {
@@ -836,20 +853,20 @@
             translatePage(lang);
 
             // Apenas carrega a mensagem inicial se shouldLoadInitialText for true
-            if (shouldLoadInitialText) {
-                editor.innerHTML = translations[lang].initialText;
-            } else {
-                editor.innerHTML = '';
-            }
+            editor.innerHTML = shouldLoadInitialText ? translations[lang].initialText : '';
 
             updateResult();
             showMainContent();
         }
 
+        // Adiciona event listeners para interações do usuário
         editor.addEventListener('input', updateResult);
         themeSelector.addEventListener('change', changeTheme);
         langSelector.addEventListener('change', changeLanguage);
 
+        /**
+         * Lógica para a primeira visita ou retorno após 48h.
+         */
         document.addEventListener('DOMContentLoaded', () => {
             const lastVisitTimestamp = localStorage.getItem('lastVisitTimestamp');
             const currentTime = new Date().getTime();
@@ -857,21 +874,17 @@
 
             // Se for a primeira visita ou se a última visita foi há mais de 48 horas
             if (!lastVisitTimestamp || (currentTime - lastVisitTimestamp > fortyEightHoursInMs)) {
-                // Exibe o seletor de idioma para o usuário
                 languageSelectorContainer.classList.add('active');
             } else {
                 // Carrega o site diretamente com as preferências salvas
                 const savedLang = localStorage.getItem('userLang');
-                const langToLoad = savedLang || 'pt'; // Default para 'pt' se não houver idioma salvo
-                
-                // O segundo parâmetro 'false' garante que a mensagem inicial não seja carregada
-                loadSite(langToLoad, false);
+                const langToLoad = savedLang || 'pt';
+                loadSite(langToLoad, false); // Não carrega o texto inicial
             }
             
-            // Atualiza o timestamp da visita para 48 horas
+            // Atualiza o timestamp da visita para resetar o contador de 48h
             localStorage.setItem('lastVisitTimestamp', currentTime);
         });
     </script>
-
 </body>
 </html>
