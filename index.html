@@ -816,12 +816,14 @@
         function setInitialLanguage() {
             const selectedLang = initialLangSelector.value;
             localStorage.setItem('userLang', selectedLang);
-            localStorage.setItem('visited', 'true');
+            // Salva o timestamp para a próxima verificação
+            localStorage.setItem('lastVisitTimestamp', new Date().getTime());
             
-            loadSite(selectedLang);
+            // Carrega o site com a mensagem inicial
+            loadSite(selectedLang, true);
         }
 
-        function loadSite(lang) {
+        function loadSite(lang, shouldLoadInitialText) {
             const savedTheme = localStorage.getItem('userTheme');
             if (savedTheme) {
                 themeSelector.value = savedTheme;
@@ -832,7 +834,14 @@
             
             langSelector.value = lang;
             translatePage(lang);
-            editor.innerHTML = translations[lang].initialText;
+
+            // Apenas carrega a mensagem inicial se shouldLoadInitialText for true
+            if (shouldLoadInitialText) {
+                editor.innerHTML = translations[lang].initialText;
+            } else {
+                editor.innerHTML = '';
+            }
+
             updateResult();
             showMainContent();
         }
@@ -842,12 +851,25 @@
         langSelector.addEventListener('change', changeLanguage);
 
         document.addEventListener('DOMContentLoaded', () => {
-            if (!localStorage.getItem('visited')) {
+            const lastVisitTimestamp = localStorage.getItem('lastVisitTimestamp');
+            const currentTime = new Date().getTime();
+            const fortyEightHoursInMs = 48 * 60 * 60 * 1000;
+
+            // Se for a primeira visita ou se a última visita foi há mais de 48 horas
+            if (!lastVisitTimestamp || (currentTime - lastVisitTimestamp > fortyEightHoursInMs)) {
+                // Exibe o seletor de idioma para o usuário
                 languageSelectorContainer.classList.add('active');
             } else {
+                // Carrega o site diretamente com as preferências salvas
                 const savedLang = localStorage.getItem('userLang');
-                loadSite(savedLang);
+                const langToLoad = savedLang || 'pt'; // Default para 'pt' se não houver idioma salvo
+                
+                // O segundo parâmetro 'false' garante que a mensagem inicial não seja carregada
+                loadSite(langToLoad, false);
             }
+            
+            // Atualiza o timestamp da visita para 48 horas
+            localStorage.setItem('lastVisitTimestamp', currentTime);
         });
     </script>
 
