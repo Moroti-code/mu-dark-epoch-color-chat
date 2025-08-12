@@ -748,16 +748,8 @@
         }
 
         function applyColor() {
-            const hexColor = colorPicker.value.substring(1);
-            const selection = window.getSelection();
-
-            if (selection.rangeCount > 0) {
-                const range = selection.getRangeAt(0);
-                const span = document.createElement('span');
-                span.style.color = `#${hexColor}`;
-                span.appendChild(range.extractContents());
-                range.insertNode(span);
-            }
+            const hexColor = colorPicker.value;
+            document.execCommand('foreColor', false, hexColor);
             updateResult();
         }
 
@@ -767,8 +759,8 @@
                 if (node.nodeType === Node.TEXT_NODE) {
                     text += node.textContent;
                 } else if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (node.tagName === 'SPAN' && node.style.color) {
-                        const hexColor = rgbToHex(node.style.color).substring(1);
+                    if (node.tagName === 'FONT' && node.color) {
+                        const hexColor = node.color.substring(1);
                         text += `[${hexColor}]${processNodes(node.childNodes)}[-]`;
                     } else if (node.tagName === 'BR') {
                         text += '\n';
@@ -779,10 +771,12 @@
             });
             return text;
         }
-
+        
         function updateResult() {
             const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = editor.innerHTML;
+            tempDiv.innerHTML = editor.innerHTML.replace(/<span style="color:\s*([^"]+);">/g, (match, color) => {
+                return `<font color="${color}">`;
+            }).replace(/<\/span>/g, '</font>');
             resultOutput.value = processNodes(tempDiv.childNodes);
         }
 
